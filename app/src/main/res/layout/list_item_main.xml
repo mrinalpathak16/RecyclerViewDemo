@@ -34,15 +34,6 @@
         tools:text="Mrinal Pathak" />
 
     <TextView
-        android:id="@+id/phn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/dp"
-        app:layout_constraintStart_toStartOf="@+id/name"
-        tools:text="0123456789" />
-
-    <TextView
         android:id="@+id/dob"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -52,5 +43,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/name"
         tools:text="24/07/2001" />
+
+    <TextView
+        android:id="@+id/phn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/dp"
+        app:layout_constraintStart_toStartOf="@+id/name"
+        tools:text="0123456789" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
