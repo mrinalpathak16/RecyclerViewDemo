@@ -16,6 +16,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.MyViewHolder> {
     private List<ModelUser> data;
     private Context mContext;
+    private OnRecyclerItemClick onRecyclerItemClick;
 
     public MyRecyclerAdapter(List<ModelUser> data, Context mContext) {
         this.data = data;
@@ -52,6 +53,20 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
             name = itemView.findViewById(R.id.name);
             phn = itemView.findViewById(R.id.phn);
             dob = itemView.findViewById(R.id.dob);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onRecyclerItemClick.onItemClicked(getAbsoluteAdapterPosition());
+                }
+            });
         }
+    }
+
+    public void setOnRecyclerItemClick(OnRecyclerItemClick onRecyclerItemClick) {
+        this.onRecyclerItemClick = onRecyclerItemClick;
+    }
+
+    public interface OnRecyclerItemClick{
+        void onItemClicked(int pos);
     }
 }
