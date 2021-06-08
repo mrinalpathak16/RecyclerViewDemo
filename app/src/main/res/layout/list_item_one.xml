@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout>
+    <data>
+        <variable
+            name="item"
+            type="com.example.recyclerviewdemo.ModelNew" />
+
+        <variable
+            name="name"
+            type="String" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -28,7 +39,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/sno"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="I am a simple text containing widget, and I do not like to do many interactive tasks" />
+        tools:text="@{item.message+ `hii`}"/>
 
     <TextView
         android:id="@+id/sno"
@@ -37,6 +48,7 @@
         android:layout_marginStart="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/msg"
+        android:visibility="@{item.isDoesSrNoVisible}"
         tools:text="1." />
 
     <androidx.constraintlayout.widget.Guideline
@@ -46,3 +58,4 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.75" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
