@@ -1,25 +1,21 @@
 package com.example.recyclerviewdemo;
 
-import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.button.MaterialButton;
+import com.example.recyclerviewdemo.databinding.ListItemOneBinding;
+import com.example.recyclerviewdemo.databinding.ListItemThreeBinding;
+import com.example.recyclerviewdemo.databinding.ListItemTwoBinding;
 
 import java.util.List;
 
 public class HeteroAdapter extends RecyclerView.Adapter {
-    private Context mContext;
     private List<ModelNew> data;
 
-    public HeteroAdapter(Context mContext, List<ModelNew> data) {
-        this.mContext = mContext;
+    public HeteroAdapter(List<ModelNew> data) {
         this.data = data;
     }
 
@@ -31,36 +27,34 @@ public class HeteroAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         if(viewType==0){
-            return new TextHolder(
-                    LayoutInflater.from(mContext).inflate(R.layout.list_item_one, parent, false)
-            );
+            ListItemOneBinding listItemOneBinding = ListItemOneBinding.inflate(layoutInflater,parent,false);
+            return new TextHolder(listItemOneBinding);
         }
         else if(viewType==1){
-            return new ImageHolder(
-                    LayoutInflater.from(mContext).inflate(R.layout.list_item_two, parent, false)
-            );
+            ListItemTwoBinding listItemTwoBinding = ListItemTwoBinding.inflate(layoutInflater,parent,false);
+            return new ImageHolder(listItemTwoBinding);
         }
         else {
-            return new AudioHolder(
-                    LayoutInflater.from(mContext).inflate(R.layout.list_item_three, parent, false)
-            );
+            ListItemThreeBinding listItemThreeBinding = ListItemThreeBinding.inflate(layoutInflater,parent,false);
+            return new AudioHolder(listItemThreeBinding);
         }
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if(holder instanceof TextHolder){
-            TextHolder textHolder = (TextHolder)holder;
-            textHolder.msg.setText(data.get(position).getMessage());
+            TextHolder textHolder = (TextHolder) holder;
+            textHolder.listItemOneBinding.setItem(data.get(position));
         }
         else if(holder instanceof ImageHolder){
             ImageHolder imageHolder = (ImageHolder)holder;
-            imageHolder.msg.setText(data.get(position).getMessage());
+            imageHolder.listItemTwoBinding.setItem(data.get(position));
         }
         else {
             AudioHolder audioHolder = (AudioHolder)holder;
-            audioHolder.msg.setText(data.get(position).getMessage());
+            audioHolder.listItemThreeBinding.setItem(data.get(position));
         }
     }
 
@@ -70,29 +64,26 @@ public class HeteroAdapter extends RecyclerView.Adapter {
     }
 
     public class TextHolder extends RecyclerView.ViewHolder{
-        TextView msg, sno;
-        public TextHolder(@NonNull View itemView) {
-            super(itemView);
-            msg = itemView.findViewById(R.id.msg);
-            sno = itemView.findViewById(R.id.sno);
+        ListItemOneBinding listItemOneBinding;
+        public TextHolder(@NonNull ListItemOneBinding listItemOneBinding) {
+            super(listItemOneBinding.getRoot());
+            this.listItemOneBinding = listItemOneBinding;
         }
     }
 
     public class ImageHolder extends RecyclerView.ViewHolder{
-        ImageView img; TextView msg;
-        public ImageHolder(@NonNull View itemView) {
-            super(itemView);
-            msg = itemView.findViewById(R.id.textView);
-            img = itemView.findViewById(R.id.imageView);
+        ListItemTwoBinding listItemTwoBinding;
+        public ImageHolder(@NonNull ListItemTwoBinding listItemTwoBinding) {
+            super(listItemTwoBinding.getRoot());
+            this.listItemTwoBinding = listItemTwoBinding;
         }
     }
 
     public class AudioHolder extends RecyclerView.ViewHolder{
-        MaterialButton play; TextView msg;
-        public AudioHolder(@NonNull View itemView) {
-            super(itemView);
-            msg = itemView.findViewById(R.id.a_cap);
-            play = itemView.findViewById(R.id.play);
+        ListItemThreeBinding listItemThreeBinding;
+        public AudioHolder(@NonNull ListItemThreeBinding listItemThreeBinding) {
+            super(listItemThreeBinding.getRoot());
+            this.listItemThreeBinding = listItemThreeBinding;
         }
     }
 }
